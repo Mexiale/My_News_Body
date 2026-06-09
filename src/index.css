@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    background-color: #030712;
+    color: #fff;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: #0a0a0a; }
+  ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #a78bfa; }
+
+  ::selection { background: #a78bfa; color: #000; }
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(15, 12, 30, 0.65);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+
+  .glass-card:hover {
+    border-color: rgba(167, 139, 250, 0.35);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px -10px rgba(167, 139, 250, 0.18);
+  }
+
+  .pillar-physical:hover {
+    border-color: rgba(52, 211, 153, 0.35) !important;
+    box-shadow: 0 12px 40px -10px rgba(52, 211, 153, 0.15) !important;
+  }
+
+  .pillar-nutrition:hover {
+    border-color: rgba(251, 191, 36, 0.35) !important;
+    box-shadow: 0 12px 40px -10px rgba(251, 191, 36, 0.15) !important;
+  }
+
+  .pillar-mental:hover {
+    border-color: rgba(167, 139, 250, 0.35) !important;
+    box-shadow: 0 12px 40px -10px rgba(167, 139, 250, 0.15) !important;
+  }
+
+  .shiny-cta {
+    position: relative;
+    overflow: hidden;
+    border-radius: 9999px;
+    background:
+      linear-gradient(#030712, #030712) padding-box,
+      linear-gradient(90deg, transparent 20%, #a78bfa 50%, transparent 80%) border-box;
+    border: 1px solid transparent;
+    background-size: 200% 100%;
+    animation: border-shine 4s linear infinite;
+  }
+
+  .bg-grid-pattern {
+    background-size: 40px 40px;
+    background-image:
+      linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+    mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
+  }
+}
+
+@layer utilities {
+  .text-balance { text-wrap: balance; }
+}
+
+@keyframes border-shine {
+  0%   { background-position: 200% 0, 200% 0; }
+  100% { background-position: -200% 0, -200% 0; }
+}
+
+@keyframes animStar {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-2000px); }
+}
+
+.stars-sm {
+  width: 1px; height: 1px;
+  background: transparent;
+  animation: animStar 100s linear infinite;
+}
+.stars-md {
+  width: 2px; height: 2px;
+  background: transparent;
+  animation: animStar 150s linear infinite;
+}
+.stars-lg {
+  width: 3px; height: 3px;
+  background: transparent;
+  animation: animStar 200s linear infinite;
+}
