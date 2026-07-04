@@ -1,0 +1,32 @@
+# Dépendances
+node_modules/
+
+# Build
+dist/
+build/
+
+# Variables d'environnement (NE JAMAIS commiter)
+.env
+.env.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Cache
+.eslintcache
+*.tsbuildinfo
+
+# Supabase local
+supabase/.temp/
