@@ -4,7 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**"My New Body"** — Plateforme de bien-être holistique et hyper-personnalisée propulsée par l'IA. Un coach quotidien bienveillant basé à Abidjan, Côte d'Ivoire, qui écoute le corps de l'utilisateur chaque matin et recalcule ses recommandations en temps réel selon trois piliers : Physique, Nutrition et Mental. Site vitrine React SPA présentant le concept, le fonctionnement technique et la phase Alpha.
+**"My New Body"** — Plateforme de bien-être holistique et hyper-personnalisée propulsée par l'IA. Un coach quotidien bienveillant basé à Abidjan, Côte d'Ivoire, qui écoute le corps de l'utilisateur chaque matin et recalcule ses recommandations en temps réel selon trois piliers : Physique, Nutrition et Mental.
+
+Le projet comprend désormais **la landing (one-page) ET la plateforme alpha fonctionnelle** : candidature, connexion magic link, check-in quotidien, génération du programme par l'API Claude, dashboard testeur. Voir [ARCHITECTURE.md](ARCHITECTURE.md) pour le détail complet.
 
 ## Commandes
 
@@ -12,38 +14,70 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 npm run dev       # Dev server sur le port 3000
 npm run build     # Build de production Vite
 npm run preview   # Aperçu du build prod sur le port 3000
-npm run lint      # ESLint
 ```
 
-Pas de suite de tests configurée.
+Pas de suite de tests configurée. (Le script `lint` existe mais ESLint n'est pas installé dans les devDependencies — utiliser `npm run build` comme vérification.)
 
 ## Stack
 
-- **Frontend :** React 18.3 + Vite 5.4, Tailwind CSS 3.4
+- **Frontend :** React 18.3 + Vite 5.4, Tailwind CSS 3.4, React Router 6
+- **Backend :** Supabase — projet `my-new-body` (`jclouhzyjsrooiykdmzu`, eu-west-3)
+  - Auth : magic link (OTP email, sans mot de passe)
+  - Postgres + RLS : `alpha_applications`, `profiles`, `check_ins`, `daily_programs`
+  - Edge Functions (Deno) : `submit-alpha-application`, `generate-daily-program`
+- **IA :** API Claude (`claude-opus-4-8` par défaut, secret `ANTHROPIC_MODEL` pour changer) avec structured outputs — appelée uniquement côté serveur
 - **Animations :** CSS keyframes + état React (pas de framer-motion)
 - **Fonts :** Google Fonts — Manrope (titres), Inter (corps de texte)
-- **Pas de backend, pas de router** — SPA one-page avec ancres `#section`
+
+## Variables d'environnement
+
+`.env` à la racine (jamais commité — voir `.env.example`) :
+
+```env
+VITE_SUPABASE_URL=          # URL du projet Supabase
+VITE_SUPABASE_ANON_KEY=     # Clé anon (publique, sécurisée par RLS)
+```
+
+Secrets côté Supabase (Dashboard → Edge Functions → Secrets) : `ANTHROPIC_API_KEY` (requis pour le coach IA), `ANTHROPIC_MODEL` (optionnel), `ALLOWED_ORIGINS` (CORS prod).
 
 ## Architecture
 
+### Routes (`src/main.jsx`)
+
+| Route | Composant | Accès |
+|---|---|---|
+| `/` | `App` — landing one-page existante | Public |
+| `/alpha` | `pages/AlphaAccess` — connexion magic link | Public |
+| `/check-in` | `pages/CheckIn` — check-in matinal (5 curseurs + nutrition + notes) | `ProtectedRoute` (testeur alpha) |
+| `/dashboard` | `pages/Dashboard` — programme du jour + historique 7 jours | `ProtectedRoute` (testeur alpha) |
+
+### Structure
+
 ```
 src/
-  main.jsx              # Entry point React
-  App.jsx               # Root : scroll progress bar + composition de toutes les sections
-  index.css             # Tailwind directives + classes utilitaires globales (glass-card, shiny-cta…)
+  main.jsx                    # Router + AuthProvider
+  App.jsx                     # Landing : scroll progress + sections
+  lib/supabase.js             # Client Supabase unique (fail-fast si env manquante)
+  contexts/AuthContext.jsx    # useAuth() → { user, profile, isAlphaTester, signInWithEmail, signOut }
   components/
-    Background.jsx      # Étoiles (box-shadow JS), dégradés, grille CSS
-    Navbar.jsx          # Nav fixe responsive avec menu mobile
-    Hero.jsx            # Hero + CheckInMock animé (3 phases cycliques)
-    HowItWorks.jsx      # 4 étapes du processus IA
-    Pillars.jsx         # Bento grid des 3 piliers (Physique · Nutrition · Mental)
-    AISection.jsx       # System prompt, JSON output, guardrails
-    Comparison.jsx      # Tableau comparatif My New Body vs alternatives
-    Legal.jsx           # Cadre légal ARTCI, Privacy by Design, SAMU 185
-    Alpha.jsx           # MVP no-code : workflow Tally → Make.com → LLM → WhatsApp
-    Contact.jsx         # Formulaire d'inscription alpha (état local, success state)
-    Footer.jsx          # Logo, liens, watermark, copyright
+    ProtectedRoute.jsx        # Gate : non connecté → /alpha ; non-alpha → écran d'attente
+    AppHeader.jsx             # Header des pages app (≠ Navbar de la landing)
+    Contact.jsx               # Formulaire alpha → Edge Function (honeypot inclus)
+    ...                       # Sections landing (Hero, Pillars, AISection, etc.)
+  pages/
+    AlphaAccess.jsx | CheckIn.jsx | Dashboard.jsx
+supabase/
+  migrations/                 # Schéma + RLS (déjà appliqués via MCP)
+  functions/                  # Edge Functions (déjà déployées)
 ```
+
+### Flux quotidien du testeur
+
+Check-in (`insert check_ins`, RLS) → `supabase.functions.invoke('generate-daily-program')` → la fonction vérifie JWT + statut alpha, appelle Claude (structured outputs), persiste `daily_programs` (idempotent, 1/jour) → Dashboard affiche les 3 piliers + alerte santé éventuelle.
+
+### Approbation des testeurs
+
+Manuelle (10 places) : Studio Supabase → `alpha_applications` → `status = 'approved'`. Les triggers synchronisent `profiles.is_alpha_tester`.
 
 ## Design System
 
@@ -56,54 +90,31 @@ accent-physical   '#34d399'   // emerald-400 — Pilier Physique
 accent-nutrition  '#fbbf24'   // amber-400   — Pilier Nutrition
 ```
 
-**Règle des 3 piliers :** chaque couleur est associée à son pilier dans toute l'UI :
-- Emerald → Physique
-- Amber → Nutrition
-- Violet/Purple → Mental
+**Règle des 3 piliers :** Emerald → Physique · Amber → Nutrition · Violet → Mental. Respectée sur la landing ET les pages app (cartes du Dashboard, curseurs du CheckIn).
 
 ### Classes CSS custom (`src/index.css`)
 
-| Classe | Usage |
-|---|---|
-| `.glass-card` | Carte glassmorphism (fond sombre, backdrop-blur, bordure subtile) |
-| `.glass-card:hover` | Élève la carte + glow violet |
-| `.pillar-physical:hover` | Override du hover avec glow emerald |
-| `.pillar-nutrition:hover` | Override avec glow amber |
-| `.pillar-mental:hover` | Override avec glow violet |
-| `.shiny-cta` | Bouton bordure animée (border-shine keyframe) |
-| `.bg-grid-pattern` | Grille de fond (lignes 1px) |
-| `.stars-sm/md/lg` | Étoiles animées (box-shadow généré en JS) |
-
-### Composant `CheckInMock` (dans `Hero.jsx`)
-
-Animation cyclique en 3 phases gérée par `useState` + `setTimeout` :
-1. **CheckInPhase** (5s) — Formulaire check-in avec barres de progression
-2. **LoadingPhase** (3s) — Indicateur d'analyse IA avec progress bar animée
-3. **ProgramPhase** (5.5s) — Cartes résultat des 3 piliers
-
-Transition : fondu + translateY entre chaque phase. Dots de navigation en bas.
+`glass-card`, `pillar-physical/nutrition/mental` (hover glows), `shiny-cta`, `bg-grid-pattern`, `stars-sm/md/lg`. Les pages app réutilisent ces classes — pas de nouveau système de style.
 
 ## Conventions clés
 
-- **Langue :** Tout le contenu UI est en **français**. Les noms de variables/composants restent en anglais (convention React).
-- **Icônes :** SVG inline (pas de librairie externe). Quelques emojis pour l'expressivité dans les sections de contenu.
-- **Commentaires :** Pas de commentaires superficiels. Uniquement pour les logiques non-évidentes (ex : la génération des étoiles).
-- **Responsive :** Mobile-first. Breakpoints Tailwind standard (`sm`, `md`, `lg`). Navbar avec menu hamburger sur mobile.
-- **Scroll :** Liens `href="#section"` avec `scroll-smooth` sur `<html>`. Barre de progression en haut de page (gérée dans `App.jsx`).
-- **Forms :** Le formulaire Contact (`Contact.jsx`) est en état local uniquement — pas encore connecté à un backend. Le `sent` state affiche un success message.
+- **Langue :** Tout le contenu UI est en **français** (tutoiement dans l'espace testeur). Variables/composants en anglais.
+- **Icônes :** SVG inline + emojis expressifs. Pas de librairie d'icônes.
+- **Sécurité :** clé Claude et service role **jamais** côté client ; validation serveur dans les Edge Functions ; honeypot `website` sur le formulaire public ; RLS sur toutes les tables.
+- **Guardrails IA :** pas de diagnostic médical ; signaux préoccupants → champ `alerte` + SAMU 185 (Côte d'Ivoire) ; nutrition ancrée dans les aliments locaux ivoiriens.
+- **Responsive :** Mobile-first, breakpoints Tailwind standard.
 
 ## Contenu & Contexte Produit
 
 - **Fondatrice :** Grace Mexiale — Abidjan, Côte d'Ivoire
 - **Contact réel :** gracemexiale@gmail.com
-- **Phase Alpha :** 10 testeurs max, 7 jours, 100% gratuit, livraison via WhatsApp/Email
-- **LLM ciblé :** Claude (Anthropic) ou GPT-4o selon disponibilité API
+- **Phase Alpha :** 10 testeurs max, 7 jours, 100% gratuit
 - **Cadre légal :** Loi n°2013-450 CI, contrôle ARTCI, Privacy by Design
 - **Urgences médicales guardrail :** SAMU 185 (Côte d'Ivoire)
 
-## À faire (prochaines étapes)
+## Reste à faire
 
-- [ ] Connecter le formulaire Contact à un webhook Make.com ou Supabase
-- [ ] Ajouter la page bilan ou dashboard testeur
-- [ ] Intégrer la vraie API IA pour le check-in live
-- [ ] Déploiement sur Hostinger ou Vercel
+- [ ] Renseigner le secret `ANTHROPIC_API_KEY` dans le dashboard Supabase (seule étape manuelle bloquante)
+- [ ] Déploiement (Vercel : `vercel.json` prêt ; Hostinger : prévoir `.htaccess`)
+- [ ] En prod : `ALLOWED_ORIGINS`, Site URL + Redirect URLs dans Supabase Auth
+- [ ] Plus tard : notifications WhatsApp, graphiques de progression, SMTP custom (Resend)

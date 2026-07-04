@@ -5,6 +5,7 @@ const links = [
   { label: 'Les 3 Piliers', href: '#piliers' },
   { label: 'Technologie IA', href: '#ia' },
   { label: 'Contact', href: '#contact' },
+  { label: 'Espace testeur', href: '/alpha' },
 ]
 
 export default function Navbar() {

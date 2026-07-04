@@ -1,14 +1,43 @@
 import { useState } from 'react'
+import { supabase } from '../lib/supabase'
 
 const OBJECTIFS = ['Perdre du poids', 'Prendre de la masse', 'Réduire le stress', 'Mieux manger', 'Améliorer mon sommeil', 'Équilibre global']
 const NIVEAUX = ['Débutant(e)', 'Intermédiaire', 'Confirmé(e)']
 
 export default function Contact() {
-  const [form, setForm] = useState({ prenom: '', email: '', objectif: '', niveau: '' })
+  const [form, setForm] = useState({ prenom: '', email: '', objectif: '', niveau: '', website: '' })
   const [sent, setSent] = useState(false)
+  const [sentMessage, setSentMessage] = useState('')
+  const [error, setError] = useState('')
+  const [submitting, setSubmitting] = useState(false)
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
+    setError('')
+
+    if (!form.objectif || !form.niveau) {
+      setError('Choisis ton objectif principal et ton niveau d’activité.')
+      return
+    }
+
+    setSubmitting(true)
+    const { data, error: fnError } = await supabase.functions.invoke('submit-alpha-application', {
+      body: {
+        prenom: form.prenom.trim(),
+        email: form.email.trim().toLowerCase(),
+        objectif: form.objectif,
+        niveau: form.niveau,
+        website: form.website, // honeypot — reste vide pour les humains
+      },
+    })
+    setSubmitting(false)
+
+    if (fnError || data?.error) {
+      setError(data?.error || 'Impossible d’envoyer ta candidature. Réessaie dans un instant.')
+      return
+    }
+
+    setSentMessage(data?.message || '')
     setSent(true)
   }
 
@@ -25,7 +54,7 @@ export default function Contact() {
               Bienvenue dans l'aventure !
             </h2>
             <p className="text-zinc-400 text-sm">
-              Votre demande a été enregistrée. Vous recevrez un email dès que votre place alpha est confirmée.
+              {sentMessage || 'Votre demande a été enregistrée. Vous recevrez un email dès que votre place alpha est confirmée.'}
             </p>
             <p className="text-accent text-xs mt-4 font-mono">
               my.new.body · Abidjan 🇨🇮
@@ -63,6 +92,18 @@ export default function Contact() {
                   />
                 </div>
               </div>
+
+              {/* Honeypot anti-bot : invisible pour les humains */}
+              <input
+                type="text"
+                value={form.website}
+                onChange={set('website')}
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                style={{ display: 'none' }}
+                aria-hidden="true"
+              />
 
               <div>
                 <label className="block text-xs font-bold uppercase text-zinc-500 mb-2 tracking-wider">Objectif principal</label>
@@ -104,11 +145,14 @@ export default function Contact() {
                 </div>
               </div>
 
+              {error && <p className="text-sm text-red-400 text-center">{error}</p>}
+
               <button
                 type="submit"
-                className="w-full py-4 bg-accent hover:bg-accent-dark text-black font-bold rounded-xl transition-colors text-sm tracking-wide mt-2"
+                disabled={submitting}
+                className="w-full py-4 bg-accent hover:bg-accent-dark disabled:opacity-60 text-black font-bold rounded-xl transition-colors text-sm tracking-wide mt-2"
               >
-                Activer mon accès Alpha →
+                {submitting ? 'Envoi en cours…' : 'Activer mon accès Alpha →'}
               </button>
 
               <p className="text-center text-xs text-zinc-600">
