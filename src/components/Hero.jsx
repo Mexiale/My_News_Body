@@ -208,7 +208,7 @@ export default function Hero() {
     <main id="accueil" className="relative pt-32 pb-16 lg:pt-48 lg:pb-28 px-4 md:px-6 overflow-hidden">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-14 lg:gap-8 items-center">
 
-        {/* Left — text */}
+        {/* Left - text */}
         <div className="flex flex-col items-center lg:items-start text-center lg:text-left order-2 lg:order-1">
 
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-black/40 backdrop-blur-md mb-7 cursor-pointer group hover:bg-white/10 transition-colors animate-fade-in-up">
@@ -230,7 +230,7 @@ export default function Hero() {
           </h1>
 
           <p className="text-lg text-zinc-300/80 max-w-xl mb-10 font-light leading-relaxed text-balance">
-            Un coach IA bienveillant qui écoute votre corps, croise trois piliers — physique, nutrition et mental — et génère votre programme personnalisé en temps réel.
+            Un coach IA bienveillant qui écoute votre corps, croise trois piliers (physique, nutrition et mental) et génère votre programme personnalisé en temps réel.
           </p>
 
           {/* Stats */}
@@ -247,7 +247,7 @@ export default function Hero() {
           <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
             <a
               href="#contact"
-              className="w-full sm:w-auto group px-8 py-3.5 bg-accent hover:bg-accent-dark text-black rounded-full font-bold tracking-wide transition-all shadow-[0_0_40px_-10px_rgba(167,139,250,0.6)] flex items-center justify-center gap-2.5"
+              className="w-full sm:w-auto group px-8 py-3.5 bg-accent-dark hover:bg-accent text-white rounded-full font-bold tracking-wide transition-all shadow-[0_0_40px_-10px_rgba(167,139,250,0.6)] flex items-center justify-center gap-2.5"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/>
@@ -264,7 +264,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Right — animated mock */}
+        {/* Right - animated mock */}
         <div className="order-1 lg:order-2 w-full flex justify-center lg:justify-end">
           <CheckInMock />
         </div>

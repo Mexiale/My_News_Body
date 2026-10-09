@@ -57,7 +57,7 @@ export default function Alpha() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
             </span>
-            <span className="text-xs font-bold text-accent tracking-wide">Phase Alpha — 7 jours · 5 à 10 testeurs</span>
+            <span className="text-xs font-bold text-accent tracking-wide">Phase Alpha · 7 jours · 5 à 10 testeurs</span>
           </div>
           <h2 className="text-3xl md:text-5xl font-bold font-manrope mb-4">
             Le MVP <span className="text-accent">No-Code</span>
@@ -115,7 +115,7 @@ export default function Alpha() {
 
             <a
               href="#contact"
-              className="block w-full py-3.5 rounded-xl bg-accent hover:bg-accent-dark text-black text-sm font-bold text-center transition-colors"
+              className="block w-full py-3.5 rounded-xl bg-accent-dark hover:bg-accent text-white text-sm font-bold text-center transition-colors"
             >
               Je rejoins la liste alpha →
             </a>

@@ -3,7 +3,7 @@ const ROWS = [
   { criteria: 'Personnalisation', mnb: '100% adaptatif', coach: 'Élevée', app: 'Faible' },
   { criteria: 'Piliers couverts', mnb: '3 (Corps · Nutr · Mental)', coach: '1 à 2 max', app: '1 seul' },
   { criteria: 'Adaptation quotidienne', mnb: 'En temps réel', coach: 'Non', app: 'Non' },
-  { criteria: 'Coût phase alpha', mnb: '0€ — Gratuit', coach: '50-200€/séance', app: '0-15€/mois' },
+  { criteria: 'Coût phase alpha', mnb: '0€ (Gratuit)', coach: '50-200€/séance', app: '0-15€/mois' },
 ]
 
 export default function Comparison() {
@@ -40,7 +40,7 @@ export default function Comparison() {
         </div>
 
         <p className="text-center text-zinc-600 text-xs mt-5 font-mono">
-          * Données estimées · Phase Alpha 2026 — My New Body, Abidjan CI
+          * Données estimées · Phase Alpha 2026 · My New Body, Abidjan CI
         </p>
       </div>
     </section>

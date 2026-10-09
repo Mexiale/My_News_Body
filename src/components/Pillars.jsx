@@ -13,7 +13,7 @@ export default function Pillars() {
             Les <span className="text-accent">3 Piliers</span> de votre bien-être
           </h2>
           <p className="text-zinc-400 mt-4 max-w-xl text-balance">
-            L'IA ne sépare pas les disciplines — elle les croise pour s'adapter à votre énergie réelle du jour.
+            L'IA ne sépare pas les disciplines, elle les croise pour s'adapter à votre énergie réelle du jour.
           </p>
         </div>
 
@@ -57,7 +57,7 @@ export default function Pillars() {
               <p className="text-[10px] font-bold tracking-widest text-accent-nutrition mb-1">PILIER 02</p>
               <h3 className="text-xl font-bold font-manrope text-white mb-2">Nutrition</h3>
               <p className="text-zinc-400 text-sm leading-relaxed">
-                Suggestions de repas basées sur vos besoins réels, votre humeur et la prévention — sans restriction culpabilisante.
+                Suggestions de repas basées sur vos besoins réels, votre humeur et la prévention, sans restriction culpabilisante.
               </p>
             </div>
             <div className="flex flex-wrap gap-1.5 mt-2">
@@ -69,7 +69,7 @@ export default function Pillars() {
             </div>
           </div>
 
-          {/* MENTAL — tall (row-span-2) */}
+          {/* MENTAL - tall (row-span-2) */}
           <div className="glass-card pillar-mental md:row-span-2 rounded-3xl p-7 flex flex-col relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-b from-accent/5 to-transparent pointer-events-none" />
             <div className="w-11 h-11 rounded-xl bg-accent/15 border border-accent/25 flex items-center justify-center text-accent mb-5">

@@ -60,11 +60,67 @@
     animation: border-shine 4s linear infinite;
   }
 
+  .legal-prose h2 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-top: 3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .legal-prose h2:first-child { margin-top: 0; }
+  .legal-prose h3 {
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #a78bfa;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .legal-prose p {
+    color: #a1a1aa;
+    line-height: 1.75;
+    margin-bottom: 1rem;
+  }
+  .legal-prose ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    color: #a1a1aa;
+    margin-bottom: 1.5rem;
+  }
+  .legal-prose ul li {
+    padding-left: 0.5rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.7;
+  }
+  .legal-prose ul li::marker { color: #7c3aed; }
+  .legal-prose strong { color: #fff; font-weight: 600; }
+  .legal-prose a {
+    color: #a78bfa;
+    text-decoration: underline;
+    text-decoration-color: rgba(167, 139, 250, 0.3);
+    text-underline-offset: 2px;
+    transition: color 0.2s;
+  }
+  .legal-prose a:hover { color: #c4b5fd; }
+  .legal-prose .callout {
+    background: rgba(167, 139, 250, 0.06);
+    border: 1px solid rgba(167, 139, 250, 0.2);
+    border-radius: 1rem;
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+  }
+  .legal-prose .callout p:last-child { margin-bottom: 0; }
+
   .bg-grid-pattern {
     background-size: 40px 40px;
     background-image:
       linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
       linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
+    -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
     mask-image: radial-gradient(circle at center, black 40%, transparent 90%);
   }
 }

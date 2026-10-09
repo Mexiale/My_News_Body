@@ -65,7 +65,7 @@ export default function AlphaAccess() {
               <div className="text-center mb-8">
                 <h1 className="text-2xl font-bold font-manrope text-white mb-2">Espace testeur</h1>
                 <p className="text-zinc-500 text-sm">
-                  Connexion sans mot de passe — un lien magique est envoyé par email.
+                  Connexion sans mot de passe : un lien magique est envoyé par email.
                 </p>
               </div>
 
@@ -89,7 +89,7 @@ export default function AlphaAccess() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-4 bg-accent hover:bg-accent-dark disabled:opacity-60 text-black font-bold rounded-xl transition-colors text-sm tracking-wide"
+                  className="w-full py-4 bg-accent-dark hover:bg-accent disabled:opacity-60 text-white font-bold rounded-xl transition-colors text-sm tracking-wide"
                 >
                   {submitting ? 'Envoi…' : 'Recevoir mon lien de connexion →'}
                 </button>

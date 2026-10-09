@@ -39,12 +39,12 @@ export default function Navbar() {
           </a>
 
           {/* Desktop links */}
-          <div className="hidden md:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-6 xl:gap-7">
             {links.map((l) => (
               <a
                 key={l.href}
                 href={l.href}
-                className="text-sm text-zinc-400 hover:text-white transition-colors duration-200"
+                className="text-sm text-zinc-400 hover:text-white transition-colors duration-200 whitespace-nowrap"
               >
                 {l.label}
               </a>
@@ -55,7 +55,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <a
               href="#contact"
-              className="shiny-cta hidden sm:flex items-center gap-2 px-5 py-2 text-xs font-bold uppercase tracking-wider text-white"
+              className="shiny-cta hidden sm:flex items-center gap-2 px-4 lg:px-5 py-2 text-xs font-bold uppercase tracking-wider text-white whitespace-nowrap"
             >
               <span>Rejoindre l'Alpha</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -66,8 +66,9 @@ export default function Navbar() {
             {/* Hamburger */}
             <button
               onClick={() => setOpen(!open)}
-              className="md:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/5"
+              className="lg:hidden w-9 h-9 flex flex-col items-center justify-center gap-1.5 rounded-lg border border-white/10 bg-white/5"
               aria-label="Menu"
+              aria-expanded={open}
             >
               <span className={`block w-5 h-0.5 bg-white transition-all duration-300 ${open ? 'rotate-45 translate-y-2' : ''}`} />
               <span className={`block w-5 h-0.5 bg-white transition-all duration-300 ${open ? 'opacity-0' : ''}`} />
@@ -78,7 +79,7 @@ export default function Navbar() {
 
         {/* Mobile menu */}
         {open && (
-          <div className="md:hidden mt-2 rounded-2xl bg-black/90 backdrop-blur-2xl border border-white/10 p-5 flex flex-col gap-3">
+          <div className="lg:hidden mt-2 rounded-2xl bg-black/90 backdrop-blur-2xl border border-white/10 p-5 flex flex-col gap-3">
             {links.map((l) => (
               <a
                 key={l.href}
@@ -92,7 +93,7 @@ export default function Navbar() {
             <a
               href="#contact"
               onClick={() => setOpen(false)}
-              className="mt-2 text-center px-5 py-2.5 rounded-full bg-accent text-black text-sm font-bold"
+              className="mt-2 text-center px-5 py-2.5 rounded-full bg-accent-dark hover:bg-accent text-white text-sm font-bold transition-colors"
             >
               Rejoindre l'Alpha
             </a>

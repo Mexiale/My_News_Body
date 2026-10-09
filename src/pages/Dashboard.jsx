@@ -123,11 +123,11 @@ export default function Dashboard() {
                 Ton check-in du jour t'attend
               </h2>
               <p className="text-zinc-400 text-sm mb-6">
-                2 minutes pour écouter ton corps — ton programme sera recalculé en fonction.
+                2 minutes pour écouter ton corps, ton programme sera recalculé en fonction.
               </p>
               <Link
                 to="/check-in"
-                className="inline-block px-8 py-3.5 bg-accent hover:bg-accent-dark text-black font-bold rounded-xl transition-colors text-sm"
+                className="inline-block px-8 py-3.5 bg-accent-dark hover:bg-accent text-white font-bold rounded-xl transition-colors text-sm"
               >
                 Faire mon check-in →
               </Link>
@@ -145,7 +145,7 @@ export default function Dashboard() {
               <button
                 onClick={retryGeneration}
                 disabled={retrying}
-                className="inline-block px-8 py-3.5 bg-accent hover:bg-accent-dark disabled:opacity-60 text-black font-bold rounded-xl transition-colors text-sm"
+                className="inline-block px-8 py-3.5 bg-accent-dark hover:bg-accent disabled:opacity-60 text-white font-bold rounded-xl transition-colors text-sm"
               >
                 {retrying ? 'Génération en cours…' : 'Générer mon programme →'}
               </button>
@@ -169,7 +169,7 @@ export default function Dashboard() {
               )}
 
               <div className="space-y-6 mb-12">
-                <PillarCard color="physical" emoji="💪" title={`Physique — ${program.physique?.titre ?? ''}`}>
+                <PillarCard color="physical" emoji="💪" title={`Physique · ${program.physique?.titre ?? ''}`}>
                   <p className="text-xs text-zinc-500 mb-3">
                     ⏱️ {program.physique?.duree_minutes} min
                   </p>
@@ -188,7 +188,7 @@ export default function Dashboard() {
                   )}
                 </PillarCard>
 
-                <PillarCard color="nutrition" emoji="🥗" title={`Nutrition — ${program.nutrition?.titre ?? ''}`}>
+                <PillarCard color="nutrition" emoji="🥗" title={`Nutrition · ${program.nutrition?.titre ?? ''}`}>
                   <div className="space-y-3 text-sm text-zinc-300">
                     <p><span className="text-accent-nutrition font-bold">Matin :</span> {program.nutrition?.matin}</p>
                     <p><span className="text-accent-nutrition font-bold">Midi :</span> {program.nutrition?.midi}</p>
@@ -201,7 +201,7 @@ export default function Dashboard() {
                   )}
                 </PillarCard>
 
-                <PillarCard color="mental" emoji="🧘" title={`Mental — ${program.mental?.titre ?? ''}`}>
+                <PillarCard color="mental" emoji="🧘" title={`Mental · ${program.mental?.titre ?? ''}`}>
                   <p className="text-xs text-zinc-500 mb-3">
                     ⏱️ {program.mental?.duree_minutes} min
                   </p>

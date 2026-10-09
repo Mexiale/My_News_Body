@@ -76,7 +76,7 @@ export default function CheckIn() {
 
     if (fnError || data?.error) {
       setPhase('error')
-      setError(data?.error || 'Le coach IA est momentanément indisponible. Ton check-in est bien enregistré — réessaie depuis ton bilan.')
+      setError(data?.error || 'Le coach IA est momentanément indisponible. Ton check-in est bien enregistré, réessaie depuis ton bilan.')
       return
     }
 
@@ -183,7 +183,7 @@ export default function CheckIn() {
 
                 <button
                   type="submit"
-                  className="w-full py-4 bg-accent hover:bg-accent-dark text-black font-bold rounded-xl transition-colors text-sm tracking-wide"
+                  className="w-full py-4 bg-accent-dark hover:bg-accent text-white font-bold rounded-xl transition-colors text-sm tracking-wide"
                 >
                   Générer mon programme du jour →
                 </button>

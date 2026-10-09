@@ -27,7 +27,7 @@ export default function Contact() {
         email: form.email.trim().toLowerCase(),
         objectif: form.objectif,
         niveau: form.niveau,
-        website: form.website, // honeypot — reste vide pour les humains
+        website: form.website, // honeypot : reste vide pour les humains
       },
     })
     setSubmitting(false)
@@ -150,7 +150,7 @@ export default function Contact() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full py-4 bg-accent hover:bg-accent-dark disabled:opacity-60 text-black font-bold rounded-xl transition-colors text-sm tracking-wide mt-2"
+                className="w-full py-4 bg-accent-dark hover:bg-accent disabled:opacity-60 text-white font-bold rounded-xl transition-colors text-sm tracking-wide mt-2"
               >
                 {submitting ? 'Envoi en cours…' : 'Activer mon accès Alpha →'}
               </button>

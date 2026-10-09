@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 const NAV_PRODUCT = [
   { label: 'Comment ça marche', href: '#comment' },
   { label: 'Les 3 Piliers', href: '#piliers' },
@@ -6,9 +8,10 @@ const NAV_PRODUCT = [
 ]
 
 const NAV_LEGAL = [
-  { label: 'Cadre légal & Sécurité', href: '#legal' },
-  { label: 'Politique de confidentialité', href: '#legal' },
-  { label: "Droit à l'oubli", href: '#contact' },
+  { label: 'Cadre légal & Sécurité', href: '/#legal', internal: false },
+  { label: 'Mentions légales', href: '/mentions-legales', internal: false },
+  { label: 'Politique de confidentialité', href: '/politique-confidentialite', internal: false },
+  { label: "Droit à l'oubli", href: '/droit-oubli', internal: false },
 ]
 
 export default function Footer() {
@@ -25,7 +28,7 @@ export default function Footer() {
             <span className="text-lg font-bold font-manrope tracking-tight text-white">My New Body</span>
           </div>
           <p className="text-zinc-500 text-sm max-w-xs leading-relaxed mb-5">
-            Un coach bien-être IA bienveillant qui écoute votre corps chaque matin et recalcule votre programme — Physique, Nutrition & Mental.
+            Un coach bien-être IA bienveillant qui écoute votre corps chaque matin et recalcule votre programme : Physique, Nutrition & Mental.
           </p>
           <div className="flex items-center gap-2 text-xs text-zinc-600">
             <span className="text-base">🇨🇮</span>
@@ -51,7 +54,11 @@ export default function Footer() {
           <ul className="space-y-3 text-zinc-500 text-sm">
             {NAV_LEGAL.map((l) => (
               <li key={l.label}>
-                <a href={l.href} className="hover:text-accent transition-colors">{l.label}</a>
+                {l.internal ? (
+                  <a href={l.href} className="hover:text-accent transition-colors">{l.label}</a>
+                ) : (
+                  <Link to={l.href} className="hover:text-accent transition-colors">{l.label}</Link>
+                )}
               </li>
             ))}
           </ul>
@@ -74,7 +81,12 @@ export default function Footer() {
 
       {/* Bottom bar */}
       <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-zinc-600 uppercase tracking-wider border-t border-zinc-900 pt-6">
-        <p>© 2026 My New Body · Mexiale Studio</p>
+        <p>
+          © 2026 My New Body ·{' '}
+          <a href="https://mexwebsolutions.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+            Mexiale
+          </a>
+        </p>
         <div className="flex items-center gap-5">
           <a href="#" className="hover:text-zinc-400 transition-colors">LinkedIn</a>
           <a href="#" className="hover:text-zinc-400 transition-colors">Instagram</a>

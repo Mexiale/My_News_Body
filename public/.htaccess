@@ -1,8 +1,100 @@
+# ============================================================
+# My New Body - Configuration Apache pour Hostinger
+# SPA React + Vite (dist/)
+# ============================================================
+
+# ---------- 1. Forcer HTTPS ----------
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
+
+  # Redirection HTTP -> HTTPS (Hostinger gere le certificat SSL)
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  # Redirection www -> non-www (change si tu veux l'inverse)
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^(.*)$ https://%1/$1 [L,R=301]
+
+  # ---------- 2. SPA fallback : toutes les routes React vers index.html ----------
+  # Si le fichier/dossier demande n'existe pas, servir index.html
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
+  RewriteCond %{REQUEST_URI} !^/api/
+  RewriteRule ^ index.html [L]
 </IfModule>
+
+# ---------- 3. Compression (gzip) ----------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/javascript text/plain text/xml
+  AddOutputFilterByType DEFLATE application/javascript application/json application/xml application/rss+xml
+  AddOutputFilterByType DEFLATE application/x-font-ttf application/vnd.ms-fontobject font/opentype image/svg+xml
+</IfModule>
+
+# ---------- 4. Cache navigateur ----------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresDefault "access plus 1 month"
+
+  # HTML : jamais en cache (pour recuperer les nouvelles versions)
+  ExpiresByType text/html "access plus 0 seconds"
+
+  # Assets hash par Vite : cache long (1 an)
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType text/javascript "access plus 1 year"
+
+  # Images & fonts
+  ExpiresByType image/jpg "access plus 6 months"
+  ExpiresByType image/jpeg "access plus 6 months"
+  ExpiresByType image/png "access plus 6 months"
+  ExpiresByType image/webp "access plus 6 months"
+  ExpiresByType image/svg+xml "access plus 6 months"
+  ExpiresByType image/x-icon "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType application/font-woff2 "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  # Les assets Vite ont un hash dans le nom (ex: index-A1b2C3.js) -> immutable
+  <FilesMatch "\.(js|css|woff2?|png|jpg|jpeg|webp|svg|ico)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # index.html : toujours re-verifier
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+  # ---------- 5. Entetes de securite ----------
+  Header set X-Content-Type-Options "nosniff"
+  Header set X-Frame-Options "SAMEORIGIN"
+  Header set Referrer-Policy "strict-origin-when-cross-origin"
+  Header set Permissions-Policy "camera=(), microphone=(), geolocation=(self), payment=()"
+  Header set Strict-Transport-Security "max-age=31536000; includeSubDomains" env=HTTPS
+</IfModule>
+
+# ---------- 6. MIME types manquants ----------
+<IfModule mod_mime.c>
+  AddType application/javascript .js .mjs
+  AddType application/json .json
+  AddType font/woff .woff
+  AddType font/woff2 .woff2
+  AddType image/svg+xml .svg
+  AddType image/webp .webp
+</IfModule>
+
+# ---------- 7. Proteger les fichiers sensibles ----------
+<FilesMatch "^\.(env|git|htaccess|htpasswd)|package\.json|package-lock\.json|vite\.config\.js$">
+  Require all denied
+</FilesMatch>
+
+# ---------- 8. Desactiver listing des repertoires ----------
+Options -Indexes
+
+# ---------- 9. Page d'erreur SPA ----------
+# Pour qu'une URL inconnue aille sur React Router (qui affichera son propre 404)
+ErrorDocument 404 /index.html

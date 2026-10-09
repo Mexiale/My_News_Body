@@ -216,7 +216,10 @@ Deno.serve(async (req) => {
     if (!anthropicResponse.ok) {
       const errBody = await anthropicResponse.text().catch(() => '');
       console.error('Anthropic API error:', anthropicResponse.status, errBody);
-      return json({ error: 'Le coach IA est momentanément indisponible. Réessaie dans quelques minutes.' }, 502);
+      return json(
+        { error: 'Le coach IA est momentanément indisponible. Réessaie dans quelques minutes.' },
+        502
+      );
     }
 
     const result = await anthropicResponse.json();
