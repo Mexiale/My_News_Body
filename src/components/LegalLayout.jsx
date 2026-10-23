@@ -41,7 +41,7 @@ export default function LegalLayout({ title, subtitle, lastUpdate, children }) {
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between gap-4 text-xs text-zinc-500">
           <p>
             © 2026 My New Body ·{' '}
-            <a href="https://mexwebsolutions.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+            <a href="https://mexiale.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
               Mexiale
             </a>{' '}
             · Abidjan, Côte d'Ivoire

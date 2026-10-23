@@ -11,7 +11,7 @@ export default function DroitOubli() {
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText('contact@mexwebsolutions.com')
+      await navigator.clipboard.writeText('contact@mexiale.com')
       setCopied(true)
       setTimeout(() => setCopied(false), 2500)
     } catch (e) {
@@ -48,14 +48,14 @@ export default function DroitOubli() {
 
       <h2>Comment faire la demande</h2>
       <p>
-        Envoyez simplement un email à <a href="mailto:contact@mexwebsolutions.com">contact@mexwebsolutions.com</a> depuis l'adresse associée à votre compte avec pour objet <strong>« Demande de suppression de mes données »</strong>.
+        Envoyez simplement un email à <a href="mailto:contact@mexiale.com">contact@mexiale.com</a> depuis l'adresse associée à votre compte avec pour objet <strong>« Demande de suppression de mes données »</strong>.
       </p>
 
       <div className="my-8 glass-card rounded-2xl p-6 border border-accent/20 not-prose">
         <p className="text-xs font-bold tracking-widest text-zinc-500 uppercase mb-4">Modèle d'email prêt à envoyer</p>
         <div className="flex flex-col sm:flex-row gap-3">
           <a
-            href={`mailto:contact@mexwebsolutions.com?subject=${emailSubject}&body=${emailBody}`}
+            href={`mailto:contact@mexiale.com?subject=${emailSubject}&body=${emailBody}`}
             className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-accent-dark hover:bg-accent transition-colors text-white font-bold text-sm"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -117,7 +117,7 @@ export default function DroitOubli() {
 
       <h2>Besoin d'aide ?</h2>
       <p>
-        Si vous avez des questions avant d'exercer ce droit, ou si vous rencontrez un problème dans le processus, écrivez-nous à <a href="mailto:contact@mexwebsolutions.com">contact@mexwebsolutions.com</a>, nous vous répondrons sous 48h.
+        Si vous avez des questions avant d'exercer ce droit, ou si vous rencontrez un problème dans le processus, écrivez-nous à <a href="mailto:contact@mexiale.com">contact@mexiale.com</a>, nous vous répondrons sous 48h.
       </p>
     </LegalLayout>
   )

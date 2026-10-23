@@ -74,7 +74,7 @@ Secrets des Edge Functions (Dashboard → Edge Functions → Secrets) :
 |---|---|---|
 | `ANTHROPIC_API_KEY` | **⚠️ À renseigner** | Clé API Claude (console.anthropic.com) — sans elle, le coach IA renvoie 503 |
 | `ANTHROPIC_MODEL` | Optionnel | Défaut : `claude-opus-4-8` |
-| `ALLOWED_ORIGINS` | À renseigner en prod | Liste d'origines CORS, ex. `https://mynewbody.ci,http://localhost:3000` |
+| `ALLOWED_ORIGINS` | À renseigner en prod | Liste d'origines CORS, ex. `https://mynewbody.mexiale.com,http://localhost:3000` |
 
 Auth (Dashboard → Authentication → URL Configuration) :
 - **Site URL** : `http://localhost:3000` en dev, le domaine de prod au déploiement.

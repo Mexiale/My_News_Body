@@ -19,9 +19,9 @@ export default function PolitiqueConfidentialite() {
         Le responsable du traitement de vos données personnelles est :
       </p>
       <ul>
-        <li><strong><a href="https://mexwebsolutions.com" target="_blank" rel="noopener noreferrer">Mexiale</a></strong></li>
+        <li><strong><a href="https://mexiale.com" target="_blank" rel="noopener noreferrer">Mexiale</a></strong></li>
         <li>Deux-Plateaux, Abidjan, Côte d'Ivoire</li>
-        <li>Contact : <a href="mailto:contact@mexwebsolutions.com">contact@mexwebsolutions.com</a></li>
+        <li>Contact : <a href="mailto:contact@mexiale.com">contact@mexiale.com</a></li>
       </ul>
       <p>
         Un <strong>Correspondant à la Protection des Données (CPD)</strong> sera nommé avant le lancement commercial, conformément à l'article 20 de la Loi n°2013-450 de Côte d'Ivoire.
@@ -87,7 +87,7 @@ export default function PolitiqueConfidentialite() {
       <h2>6. Destinataires et sous-traitants</h2>
       <p>Vos données sont accessibles exclusivement par :</p>
       <ul>
-        <li><strong><a href="https://mexwebsolutions.com" target="_blank" rel="noopener noreferrer">Mexiale</a></strong>, seule entité habilitée à consulter les données nominatives.</li>
+        <li><strong><a href="https://mexiale.com" target="_blank" rel="noopener noreferrer">Mexiale</a></strong>, seule entité habilitée à consulter les données nominatives.</li>
         <li><strong>Supabase Inc.</strong> (hébergement de la base de données) : serveurs situés en France (Paris, région eu-west-3).</li>
         <li><strong>Anthropic PBC</strong> (API Claude) : les données de check-in sont envoyées à l'API Claude pour générer votre programme. Anthropic s'engage contractuellement à ne pas entraîner ses modèles sur les données API soumises par les développeurs.</li>
         <li><strong>Hostinger International Ltd.</strong> (hébergement du site vitrine) : n'a jamais accès à vos données de santé.</li>
@@ -118,7 +118,7 @@ export default function PolitiqueConfidentialite() {
         <li><strong>Droit de retrait du consentement</strong> : à tout moment, sans justification</li>
       </ul>
       <p>
-        Pour exercer ces droits, écrivez à <a href="mailto:contact@mexwebsolutions.com">contact@mexwebsolutions.com</a>. Nous nous engageons à répondre dans un délai maximum de <strong>30 jours</strong>.
+        Pour exercer ces droits, écrivez à <a href="mailto:contact@mexiale.com">contact@mexiale.com</a>. Nous nous engageons à répondre dans un délai maximum de <strong>30 jours</strong>.
       </p>
 
       <h2>9. Cookies et traceurs</h2>

@@ -83,7 +83,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-xs text-zinc-600 uppercase tracking-wider border-t border-zinc-900 pt-6">
         <p>
           © 2026 My New Body ·{' '}
-          <a href="https://mexwebsolutions.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+          <a href="https://mexiale.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
             Mexiale
           </a>
         </p>

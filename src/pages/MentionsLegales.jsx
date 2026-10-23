@@ -12,14 +12,14 @@ export default function MentionsLegales() {
         Le site <strong>My New Body</strong> (ci-après « le Site ») est édité par :
       </p>
       <ul>
-        <li><strong><a href="https://mexwebsolutions.com" target="_blank" rel="noopener noreferrer">Mexiale</a></strong>, entreprise individuelle en Côte d'Ivoire</li>
+        <li><strong><a href="https://mexiale.com" target="_blank" rel="noopener noreferrer">Mexiale</a></strong>, entreprise individuelle en Côte d'Ivoire</li>
         <li>Adresse : Deux-Plateaux, Abidjan, République de Côte d'Ivoire</li>
-        <li>Contact : <a href="mailto:contact@mexwebsolutions.com">contact@mexwebsolutions.com</a></li>
+        <li>Contact : <a href="mailto:contact@mexiale.com">contact@mexiale.com</a></li>
       </ul>
 
       <h2>Direction de la publication</h2>
       <p>
-        La direction de la publication est assurée par <strong><a href="https://mexwebsolutions.com" target="_blank" rel="noopener noreferrer">Mexiale</a></strong>.
+        La direction de la publication est assurée par <strong><a href="https://mexiale.com" target="_blank" rel="noopener noreferrer">Mexiale</a></strong>.
       </p>
 
       <h2>Hébergement</h2>
@@ -57,7 +57,7 @@ export default function MentionsLegales() {
 
       <h2>Propriété intellectuelle</h2>
       <p>
-        L'ensemble des contenus présents sur le Site (textes, graphismes, logos, images, code source, charte graphique) est la propriété exclusive de <a href="https://mexwebsolutions.com" target="_blank" rel="noopener noreferrer">Mexiale</a> ou de ses partenaires et est protégé par les lois en vigueur sur la propriété intellectuelle.
+        L'ensemble des contenus présents sur le Site (textes, graphismes, logos, images, code source, charte graphique) est la propriété exclusive de <a href="https://mexiale.com" target="_blank" rel="noopener noreferrer">Mexiale</a> ou de ses partenaires et est protégé par les lois en vigueur sur la propriété intellectuelle.
       </p>
       <p>
         Toute reproduction, représentation, modification, publication ou adaptation, totale ou partielle, des éléments du Site, quel que soit le moyen ou le procédé utilisé, est interdite sans autorisation écrite préalable.
@@ -65,12 +65,12 @@ export default function MentionsLegales() {
 
       <h2>Liens hypertextes</h2>
       <p>
-        Le Site peut contenir des liens vers des sites tiers. <a href="https://mexwebsolutions.com" target="_blank" rel="noopener noreferrer">Mexiale</a> ne saurait être tenue responsable du contenu, des pratiques ou des politiques de confidentialité des sites tiers accessibles via ces liens.
+        Le Site peut contenir des liens vers des sites tiers. <a href="https://mexiale.com" target="_blank" rel="noopener noreferrer">Mexiale</a> ne saurait être tenue responsable du contenu, des pratiques ou des politiques de confidentialité des sites tiers accessibles via ces liens.
       </p>
 
       <h2>Modification des mentions légales</h2>
       <p>
-        <a href="https://mexwebsolutions.com" target="_blank" rel="noopener noreferrer">Mexiale</a> se réserve le droit de modifier à tout moment les présentes mentions légales. Les utilisateurs sont invités à les consulter régulièrement. La date de dernière mise à jour figure en haut de ce document.
+        <a href="https://mexiale.com" target="_blank" rel="noopener noreferrer">Mexiale</a> se réserve le droit de modifier à tout moment les présentes mentions légales. Les utilisateurs sont invités à les consulter régulièrement. La date de dernière mise à jour figure en haut de ce document.
       </p>
 
       <h2>Droit applicable</h2>
@@ -83,8 +83,8 @@ export default function MentionsLegales() {
         Pour toute question concernant ces mentions légales :
       </p>
       <ul>
-        <li>Email : <a href="mailto:contact@mexwebsolutions.com">contact@mexwebsolutions.com</a></li>
-        <li>Adresse : <a href="https://mexwebsolutions.com" target="_blank" rel="noopener noreferrer">Mexiale</a>, Deux-Plateaux, Abidjan, Côte d'Ivoire</li>
+        <li>Email : <a href="mailto:contact@mexiale.com">contact@mexiale.com</a></li>
+        <li>Adresse : <a href="https://mexiale.com" target="_blank" rel="noopener noreferrer">Mexiale</a>, Deux-Plateaux, Abidjan, Côte d'Ivoire</li>
       </ul>
     </LegalLayout>
   )
